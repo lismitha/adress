@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,48 +9,69 @@ namespace adress
 {
     public class person
     {
-        public static void Main(string[] args)
+        public static object AddressBook { get; private set; }
+
+        public static void Main(string[]args)
         {
-            Console.WriteLine("enter the First name:");
-            string FirstName = Console.ReadLine();
+            Hashtable AdressBook = new Hashtable();
 
-            Console.WriteLine("enter the Last name:");
-            string LastName = Console.ReadLine();
+            while (true)
+            {
+                Console.WriteLine("\n#############Adress Book###########");
+                Console.WriteLine("\t1:Add number to Adress book");
+                Console.WriteLine("\t2:Get number to Adress book");
+                Console.WriteLine("\t3:Exit");
+                Console.WriteLine("\n#################################");
+                Console.WriteLine("\n\nEnter choice: ");
+                int choice = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("enter the Email id:");
-            string EmailMailId = Console.ReadLine();
+                switch (choice)
+                {
+                    case 1:
+                        {
+                            Console.WriteLine("Enter your name : ");
+                            string  name = Console.ReadLine();
 
-            Console.WriteLine("enter the phone number");
-            int PhoneNumber = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Enter your phone number : ");
+                             long number = Convert.ToInt64(Console.ReadLine());
 
-            Console.WriteLine("enter the adress:");
-            string Address = Console.ReadLine();
+                            AdressBook.Add(name, number);
+                        }
+                            break;
+                    case 2:
+                        {
+                            long number = 0;
+                            string name;
 
-            Console.WriteLine("enter the city:");
-            string city = Console.ReadLine();
+                            Console.Write("Enter your name : ");
+                            name = Console.ReadLine();
 
-            Console.WriteLine("enter the state:");
-            string state = Console.ReadLine();
+                            if (AdressBook[name] == null)
+                            {
+                                Console.WriteLine("Given name is not found in phonebook");
+                            }
+                            else
+                            {
+                                number = Convert.ToInt64(AdressBook[name]);
+                                Console.WriteLine("Name: " + name + ", phone number: " + number);
+                            }
+                        }
+                          break;
+                    case 3:
+                        {
+                            goto OUT;
+                        }
+                           break;
+                    default:
+                        {
+                            Console.WriteLine("\nYou have entered wrong choice");
+                        }
+                        break;
+                }
+            }
 
-            Console.WriteLine("enter the country:");
-            string country = Console.ReadLine();
-
-            Console.WriteLine("enter the Zip code:");
-            int ZipCode = Convert.ToInt32(Console.ReadLine());
-
-
-            Console.WriteLine("=========================");
-
-            Console.WriteLine("the address of the person is ");
-
-            Console.WriteLine("Name: " + FirstName + LastName);
-            Console.WriteLine("Phone Number: " + PhoneNumber);
-            Console.WriteLine("Address : " + Address);
-            Console.WriteLine("State : " + state);
-            Console.WriteLine("country : " + country);
-            Console.WriteLine("zip code : " + ZipCode);
+          OUT:
+                 Console.WriteLine("\nThankyou for using Adressbook");
         }
     }
 }
-        
-      
